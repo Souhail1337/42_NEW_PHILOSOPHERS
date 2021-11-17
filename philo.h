@@ -32,5 +32,8 @@ typedef struct s_philo
 
 void        error();
 t_args     *init_zab(t_args *philo, char **str, int ac);
+t_time      wkita();
+t_philo     *init_falasifa(int nbr_f);
+int         ft_atoi(const char *str);
 
 #endif
