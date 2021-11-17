@@ -70,10 +70,10 @@ int	ft_atoi(const char *str)
 	return ((int)(result * sign));
 }
 
-t_philo *init_zab(t_philo *philo, char **str, int ac)
+t_args *init_zab(t_args *philo, char **str, int ac)
 {
-    philo = malloc(sizeof(t_philo));
-    philo->philo = ft_atoi(str[1]) ;
+    philo = malloc(sizeof(t_args));
+    philo->nbr_philo = ft_atoi(str[1]) ;
     philo->die =  ft_atoi(str[2]);
     philo->think = ft_atoi(str[3]);
     philo->sleept = ft_atoi(str[4]);
@@ -85,13 +85,13 @@ t_philo *init_zab(t_philo *philo, char **str, int ac)
         if (philo->meals < 0)
             error();
     }
-    if (philo->philo < 0 || philo->die < 0 || philo->think < 0 || 
+    if (philo->nbr_philo < 0 || philo->die < 0 || philo->think < 0 || 
         philo->sleept < 0)
             error();
     return (philo);
 }
 
-t_philo *values(char **str, t_philo *philo)
+t_args *values(char **str, t_args *philo)
 {
     int i = 1;
     while(str[i] != NULL)
@@ -102,15 +102,72 @@ t_philo *values(char **str, t_philo *philo)
     return (philo);
 }
 
+t_philo *init_falasifa(int nbr_f)
+{
+	t_philo *fibos;
+	fibos = malloc(sizeof(t_philo) * (nbr_f));
+	int i;
+
+	i = 0;
+	while(i < nbr_f)
+	{
+		fibos[i].id = i;
+		i++;
+	}
+	while(i < nbr_f)
+	{
+		printf("PHILO NBR = %d\n",fibos[i].id + 1) ;
+		i++;
+	}
+	return (fibos);
+}
+
+t_time wkita()
+{
+	struct timeval  tv;
+	gettimeofday(&tv,NULL);
+	return (tv.tv_sec * 1000); // convert to milisecond ;
+}
+
+void *hayat(void *zaim)
+{
+	 t_philo *fibos;
+
+	fibos = zaim;
+	while(1)
+	{
+		printf("%lld Pillo nbr %d is alive\n", wkita(), fibos->id);
+		sleep(1);
+	}
+	
+	
+	return (zaim);
+}
+
+void lahoakbar(t_philo *fibos, int nbr_f)
+{
+	int i;
+
+	i = 0;
+	while (i < nbr_f)
+	{
+		pthread_create(&(fibos[i].routini), NULL, hayat, &(fibos[i]));
+		i++;
+
+	}
+}
+
 
 int main(int ac, char **av)
 {
-    t_philo *philo;
-    
+    t_args *args;
+    t_philo *fibos;
     if (ac == 5 || ac == 6)
     {
-        philo = init_zab(philo,av, ac);
-
+        args = init_zab(args,av,ac);
+		fibos = init_falasifa(args->nbr_philo);
+		lahoakbar(fibos, args->nbr_philo);
     }
+	while(1);
     return (0);
 }

@@ -7,16 +7,30 @@
 #include <pthread.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include <sys/time.h>
 
-typedef struct s_philo
+typedef long long t_time; 
+
+typedef struct s_args
 {
-    int philo;
+    int nbr_philo;
     int die;
     int sleept;
     int think;
     int meals;
+}   t_args;
+
+typedef struct s_philo
+{
+    int id;
+    pthread_t routini;
+    pthread_mutex_t forshita; /// no fuking mallooc l pthread 7it type opaque
+    int nbr_to_eat;
+    int last_meals; // akhir mra kla mskin
+
 }   t_philo;
 
-void error();
-t_philo *init_zab(t_philo *philo, char **str, int ac);
+void        error();
+t_args     *init_zab(t_args *philo, char **str, int ac);
+
 #endif
