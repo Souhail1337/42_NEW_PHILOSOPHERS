@@ -69,10 +69,35 @@ int	ft_atoi(const char *str)
 	}
 	return ((int)(result * sign));
 }
-
-t_args *init_zab(t_args *philo, char **str, int ac)
+void error_f()
 {
-    philo = malloc(sizeof(t_args));
+	printf("maymknsh ykoun 0 faylasof wash nta hbil");
+	exit(0);
+}
+pthread_mutex_t *initliaz_frashet(t_param *philo)
+{
+	pthread_mutex_t *frashet;
+	int i;
+
+	i = 0;
+
+	frashet = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * philo->nbr_philo);
+	if (!frashet)
+
+		return (NULL);
+	while(i < philo->nbr_philo)
+	{
+		pthread_mutex_init(&frashet[i],0);
+		i++;
+	}
+	return (frashet);
+}
+
+t_param *init_zab(t_param *philo, char **str, int ac)
+{
+	t_philo *fibox;
+	fibox = malloc(sizeof(t_philo));
+    philo = malloc(sizeof(t_param));
     philo->nbr_philo = ft_atoi(str[1]) ;
     philo->die =  ft_atoi(str[2]);
     philo->think = ft_atoi(str[3]);
@@ -88,10 +113,13 @@ t_args *init_zab(t_args *philo, char **str, int ac)
     if (philo->nbr_philo < 0 || philo->die < 0 || philo->think < 0 || 
         philo->sleept < 0)
             error();
-    return (philo);
+	if (philo->nbr_philo == 0)
+		error_f();
+	
+	return (philo);
 }
 
-t_args *values(char **str, t_args *philo)
+t_param *values(char **str, t_param *philo)
 {
     int i = 1;
     while(str[i] != NULL)
@@ -104,24 +132,10 @@ t_args *values(char **str, t_args *philo)
 
 t_philo *init_falasifa(int nbr_f)
 {
-	t_philo *fibos;
-	fibos = malloc(sizeof(t_philo) * (nbr_f));
-	int i;
-
+	int  i;
 	i = 0;
-	while(i < nbr_f)
-	{
-		fibos[i].id = i;
-		i++;
-	}
-	while(i < nbr_f)
-	{
-		printf("PHILO NBR = %d\n",fibos[i].id + 1) ;
-		i++;
-	}
-	return (fibos);
-}
 
+}
 t_time wkita()
 {
 	struct timeval  tv;
@@ -132,11 +146,13 @@ t_time wkita()
 void *hayat(void *zaim)
 {
 	 t_philo *fibos;
+	 t_param *filox;
 
 	fibos = zaim;
 	while(1)
 	{
 		printf("%lld Pillo nbr %d is alive\n", wkita(), fibos->id);
+		//printf("frashet = %d\n", (int)filox->forshita);
 		sleep(1);
 	}
 	
@@ -157,17 +173,30 @@ void lahoakbar(t_philo *fibos, int nbr_f)
 	}
 }
 
+void erorixa(void)
+{
+	printf("Usage: Nbr of philos, Time to die, time to eat, time to sleep\n");
+	printf("and nbr of meals\n");
+	exit(0);
+}
 
 int main(int ac, char **av)
 {
-    t_args *args;
+    t_param *param;
     t_philo *fibos;
+	int f;
+	int i;
     if (ac == 5 || ac == 6)
     {
-        args = init_zab(args,av,ac);
-		fibos = init_falasifa(args->nbr_philo);
-		lahoakbar(fibos, args->nbr_philo);
+        param = init_zab(param,av,ac);
+		param->forshita = initliaz_frashet(param);
+		fibos = init_falasifa(param->nbr_philo);
+		if (param->forshita == NULL)
+			return (NULL);
+		lahoakbar(fibos, param->nbr_philo);
     }
+	else
+		erorixa();
 	while(1);
     return (0);
 }
