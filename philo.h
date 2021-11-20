@@ -6,7 +6,7 @@
 /*   By: sel-fcht <sel-fcht@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 01:07:40 by sel-fcht          #+#    #+#             */
-/*   Updated: 2021/11/20 13:50:40 by sel-fcht         ###   ########.fr       */
+/*   Updated: 2021/11/20 14:04:41 by sel-fcht         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,11 @@ typedef struct s_spopo
 	pthread_mutex_t	blati;
 }					t_spopo;
 
-t_spopo				*init_test(t_spopo *philo, char **str, int ac);
+int					init_test(t_spopo *philo, char **str, int ac);
 t_time				wkita(void);
 t_spopo				*init_falasifa(t_spopo *filoxa);
 pthread_mutex_t		*initliaz_frashet(t_spopo *philo);
 int					ft_atoi(const char *str);
-void				erorixa(void);
 void				*routini(void *filoxa);
 void				init_routini(t_spopo *spopowa);
 void				eami_lboulisi(t_spopo *spopowa);
@@ -69,7 +68,5 @@ void				neass(t_philo *filoxa);
 void				koul(t_philo *filoxa);
 void				kteb(t_philo *filoxa, char *ashdar);
 void				timer(int t);
-void				error_f(void);
-void				error(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sel-fcht <sel-fcht@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:39:01 by sel-fcht          #+#    #+#             */
-/*   Updated: 2021/11/20 13:48:29 by sel-fcht         ###   ########.fr       */
+/*   Updated: 2021/11/20 14:05:44 by sel-fcht         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_spopo	*init_falasifa(t_spopo *spopowa)
 	return (spopowa);
 }
 
-t_spopo	*init_test(t_spopo *spopowa, char **str, int ac)
+int	init_test(t_spopo *spopowa, char **str, int ac)
 {
 	spopowa->paramixa->nbr_philo = ft_atoi(str[1]);
 	spopowa->paramixa->die = ft_atoi(str[2]);
@@ -71,8 +71,8 @@ t_spopo	*init_test(t_spopo *spopowa, char **str, int ac)
 		|| spopowa->paramixa->sleept <= 0)
 		return (0);
 	if (spopowa->paramixa->nbr_philo == 0)
-		return(0);
-	return (spopowa);
+		return (0);
+	return (1);
 }
 
 void	init_routini(t_spopo *spopowa)

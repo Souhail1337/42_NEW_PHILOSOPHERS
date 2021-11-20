@@ -6,7 +6,7 @@
 /*   By: sel-fcht <sel-fcht@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:36:45 by sel-fcht          #+#    #+#             */
-/*   Updated: 2021/11/20 13:57:46 by sel-fcht         ###   ########.fr       */
+/*   Updated: 2021/11/20 14:06:30 by sel-fcht         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,20 @@ int	main(int ac, char **av)
 {
 	t_spopo	*spopowa;
 	t_time	start;
+	int		i;
 
 	spopowa = malloc(sizeof(t_spopo));
 	start = wkita();
 	if (ac == 5 || ac == 6)
 	{
 		spopowa->paramixa->kla = 0;
-		spopowa = init_test(spopowa, av, ac);
+		i = init_test(spopowa, av, ac);
+		if (i == 0)
+			return (0);
 		spopowa->forshita = initliaz_frashet(spopowa);
 		spopowa = init_falasifa(spopowa);
 		init_routini(spopowa);
 		eami_lboulisi(spopowa);
 	}
-	else
-		erorixa();
 	return (0);
 }
