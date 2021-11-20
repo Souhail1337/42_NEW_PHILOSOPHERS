@@ -6,7 +6,7 @@
 /*   By: sel-fcht <sel-fcht@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:39:01 by sel-fcht          #+#    #+#             */
-/*   Updated: 2021/11/19 00:50:54 by sel-fcht         ###   ########.fr       */
+/*   Updated: 2021/11/20 13:48:29 by sel-fcht         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ pthread_mutex_t	*initliaz_frashet(t_spopo *spopowa)
 		return (NULL);
 	while (i < spopowa->paramixa->nbr_philo)
 	{
-		pthread_mutex_init(&frashet[i], 0);
+		pthread_mutex_init(&frashet[i], NULL);
 		i++;
 	}
 	return (frashet);
@@ -52,26 +52,26 @@ t_spopo	*init_falasifa(t_spopo *spopowa)
 	return (spopowa);
 }
 
-t_spopo	*init_zab(t_spopo *spopowa, char **str, int ac)
+t_spopo	*init_test(t_spopo *spopowa, char **str, int ac)
 {
 	spopowa->paramixa->nbr_philo = ft_atoi(str[1]);
 	spopowa->paramixa->die = ft_atoi(str[2]);
-	spopowa->paramixa->think = ft_atoi(str[3]);
+	spopowa->paramixa->t_eat = ft_atoi(str[3]);
 	spopowa->paramixa->sleept = ft_atoi(str[4]);
 	if (ac == 5)
 		spopowa->paramixa->meals = -1;
 	if (ac == 6)
 	{
 		spopowa->paramixa->meals = ft_atoi(str[5]);
-		if (spopowa->paramixa->meals < 0)
-			error();
+		if (spopowa->paramixa->meals <= 0)
+			return (0);
 	}
-	if (spopowa->paramixa->nbr_philo < 0 || spopowa->paramixa->die < 0
-		|| spopowa->paramixa->think < 0
-		|| spopowa->paramixa->sleept < 0)
-		error();
+	if (spopowa->paramixa->nbr_philo <= 0 || spopowa->paramixa->die <= 0
+		|| spopowa->paramixa->t_eat <= 0
+		|| spopowa->paramixa->sleept <= 0)
+		return (0);
 	if (spopowa->paramixa->nbr_philo == 0)
-		error_f();
+		return(0);
 	return (spopowa);
 }
 
@@ -87,7 +87,8 @@ void	init_routini(t_spopo *spopowa)
 	while (i < spopowa->paramixa->nbr_philo)
 	{
 		pthread_create(tmp + i, NULL, &routini, spopowa->filoxat + i);
-		usleep(300);
-		i++;
+		usleep(60);
+		i += 1;
 	}
+	free(tmp);
 }

@@ -6,14 +6,13 @@
 #    By: sel-fcht <sel-fcht@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 14:24:15 by sel-fcht          #+#    #+#              #
-#    Updated: 2021/11/17 14:29:25 by sel-fcht         ###   ########.fr        #
+#    Updated: 2021/11/20 13:08:25 by sel-fcht         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = *.c 
 NAME = philosopher
-FLAGs = -Wall -Werror -Wextra 
-
+FLAGS = -Wall -Werror -Wextra 
 
 all: $(NAME)
 
@@ -24,8 +23,6 @@ clean:
 	rm -f $(NAME)
 
 fclean: clean
-
-
 
 norm:
 	norminette

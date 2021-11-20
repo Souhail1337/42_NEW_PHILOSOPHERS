@@ -6,7 +6,7 @@
 /*   By: sel-fcht <sel-fcht@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 01:07:40 by sel-fcht          #+#    #+#             */
-/*   Updated: 2021/11/19 01:16:19 by sel-fcht         ###   ########.fr       */
+/*   Updated: 2021/11/20 13:50:40 by sel-fcht         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ typedef struct s_param
 	int				nbr_philo;
 	int				die;
 	int				sleept;
-	int				think;
+	int				t_eat;
 	int				meals;
+	int				kla;
 }					t_param;
 
 typedef struct s_philo
@@ -41,6 +42,7 @@ typedef struct s_philo
 	pthread_mutex_t	is_eating;
 	struct s_spopo	*spopo;
 	int				nbr_to_eat;
+	int				nbr_meals;
 	t_time			last_meals;
 }					t_philo;
 
@@ -53,8 +55,7 @@ typedef struct s_spopo
 	pthread_mutex_t	blati;
 }					t_spopo;
 
-void				error(void);
-t_spopo				*init_zab(t_spopo *philo, char **str, int ac);
+t_spopo				*init_test(t_spopo *philo, char **str, int ac);
 t_time				wkita(void);
 t_spopo				*init_falasifa(t_spopo *filoxa);
 pthread_mutex_t		*initliaz_frashet(t_spopo *philo);
@@ -68,5 +69,7 @@ void				neass(t_philo *filoxa);
 void				koul(t_philo *filoxa);
 void				kteb(t_philo *filoxa, char *ashdar);
 void				timer(int t);
+void				error_f(void);
+void				error(void);
 
 #endif

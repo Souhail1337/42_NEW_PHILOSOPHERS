@@ -6,7 +6,7 @@
 /*   By: sel-fcht <sel-fcht@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:42:19 by sel-fcht          #+#    #+#             */
-/*   Updated: 2021/11/19 00:43:46 by sel-fcht         ###   ########.fr       */
+/*   Updated: 2021/11/20 07:31:09 by sel-fcht         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ t_time	wkita(void)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+	return (tv.tv_sec * 1000 + (tv.tv_usec / 1000));
 }

@@ -6,7 +6,7 @@
 /*   By: sel-fcht <sel-fcht@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:47:46 by sel-fcht          #+#    #+#             */
-/*   Updated: 2021/11/19 00:49:47 by sel-fcht         ###   ########.fr       */
+/*   Updated: 2021/11/20 11:23:20 by sel-fcht         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	neass(t_philo *filoxa)
 {
-	kteb(filoxa, "n3ass");
+	kteb(filoxa, "is Sleeping");
 	timer(filoxa->spopo->paramixa->sleept * 1000);
 }
 
 void	fkr(t_philo *filoxa)
 {
-	kteb(filoxa, "kikhamem");
+	kteb(filoxa, "Is Thinking");
 }
 
 void	*routini(void *filoxa)
@@ -28,6 +28,7 @@ void	*routini(void *filoxa)
 	t_philo	*philo;
 
 	philo = (t_philo *)filoxa;
+	philo->last_meals = wkita();
 	while (1)
 	{
 		koul(philo);

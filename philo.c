@@ -6,7 +6,7 @@
 /*   By: sel-fcht <sel-fcht@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:36:45 by sel-fcht          #+#    #+#             */
-/*   Updated: 2021/11/19 00:59:10 by sel-fcht         ###   ########.fr       */
+/*   Updated: 2021/11/20 13:57:46 by sel-fcht         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	kteb(t_philo *filoxa, char *ashdar)
 
 	time = wkita() - filoxa->spopo->start_simul;
 	pthread_mutex_lock(&filoxa->spopo->blati);
-	printf("[%llu] faylasouf %d %s\n", time, filoxa->id, ashdar);
-	if (strcmp(ashdar, "mat mskin (l3o9ba l anass o omar)") == 0)
+	printf("[%llu] Philo : %d %s\n", time, filoxa->id, ashdar);
+	if (strcmp(ashdar, "Died") == 0)
 	{
 		usleep(1000);
 		exit(0);
@@ -30,21 +30,21 @@ void	kteb(t_philo *filoxa, char *ashdar)
 void	koul(t_philo *filoxa)
 {
 	pthread_mutex_lock(&filoxa->spopo->forshita[filoxa->left_forks]);
-	kteb(filoxa, "shed fourshita lisriya");
+	kteb(filoxa, "Took the left fork");
 	pthread_mutex_lock(&filoxa->spopo->forshita[filoxa->right_fork]);
-	kteb(filoxa, "shed fourshita limniya");
-	kteb(filoxa, "kiyakoul");
-	timer(filoxa->spopo->paramixa->think * 1000);
-	filoxa->last_meals = wkita();
+	kteb(filoxa, "took the right fork");
+	pthread_mutex_lock(&filoxa->is_eating);
+	kteb(filoxa, " is eating");
 	filoxa->nbr_to_eat++;
+	timer(filoxa->spopo->paramixa->t_eat * 1000);
+	pthread_mutex_unlock(&filoxa->is_eating);
+	filoxa->last_meals = wkita();
 	pthread_mutex_unlock(&filoxa->spopo->forshita[filoxa->left_forks]);
 	pthread_mutex_unlock(&filoxa->spopo->forshita[filoxa->right_fork]);
 }
 
 int	main(int ac, char **av)
 {
-	t_param	*param;
-	t_philo	*fibos;
 	t_spopo	*spopowa;
 	t_time	start;
 
@@ -52,17 +52,14 @@ int	main(int ac, char **av)
 	start = wkita();
 	if (ac == 5 || ac == 6)
 	{
-		spopowa = init_zab(spopowa, av, ac);
+		spopowa->paramixa->kla = 0;
+		spopowa = init_test(spopowa, av, ac);
 		spopowa->forshita = initliaz_frashet(spopowa);
 		spopowa = init_falasifa(spopowa);
-		if (spopowa->forshita == NULL)
-			return (0);
 		init_routini(spopowa);
+		eami_lboulisi(spopowa);
 	}
 	else
 		erorixa();
-	eami_lboulisi(spopowa);
-	while (1)
-		;
 	return (0);
 }
